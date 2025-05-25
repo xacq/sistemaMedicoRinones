@@ -1,0 +1,31 @@
+Copiar los arvhivos al C: o disco Raiz
+
+Instalar las siguientes librerias
+    pip install django pillow 
+
+
+Ingresar a la carpeta SSMEDICO
+Activar el sistema en entorno virtual y poder correr el sistema hay que ejecutar dentro de la raiz del proyecto
+    .venv\Scripts\activate
+
+Para activar la base de datos (solo de ser necesario)
+    python manage.py migrate (solo de ser necesario ya que la base de datos ya esta en el sistema)
+
+Para generar un superusuario (de ser necesario)
+    python manage.py createsuperuser
+
+Nombre del superusuario
+    user: ssmedicouser
+    email: ssmedico@gmail.com
+    password: 123Qwerty$%^
+
+Cuenta de medico
+    user: MedicoGeneral
+    password: 123Qwerty$%^
+
+Cuenta de paciente
+    user: PacienteGeneral
+    password: 123Qwerty$%^
+
+Para ejecutar el sistema 
+    python manage.py runserver

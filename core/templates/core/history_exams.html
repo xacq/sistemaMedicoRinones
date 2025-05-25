@@ -1,0 +1,37 @@
+{% extends "core/base.html" %}
+{% block title %}Historial de Exámenes{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Historial de Exámenes</h2>
+    {% if history_exams %}
+    <table class="table table-bordered table-hover mt-4">
+        <thead class="thead-light">
+            <tr>
+                <th>Fecha</th>
+                <th>Tipo de Examen</th>
+                <th>Resultado</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for exam in history_exams %}
+            <tr>
+                <td>{{ exam.date|date:"d/m/Y" }}</td>
+                <td>{{ exam.exam_type }}</td>
+                <td>{{ exam.result }}</td>
+                <td>
+                    <a href="{% url 'patient_exam_detail' exam.id %}" class="btn btn-info btn-sm">Ver Detalle</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-info" role="alert">
+        No se ha registrado ningún examen.
+    </div>
+    {% endif %}
+    <a href="{% url 'dashboard_patient' %}" class="btn btn-secondary mt-3">Volver al Dashboard</a>
+</div>
+{% endblock %}

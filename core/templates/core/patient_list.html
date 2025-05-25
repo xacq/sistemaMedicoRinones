@@ -1,0 +1,42 @@
+{% extends "core/base.html" %}
+{% block title %}Lista de Pacientes{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Lista de Pacientes</h2>
+    <div class="mb-3">
+        <a href="{% url 'patient_create' %}" class="btn btn-outline-secondary">Agregar Paciente</a>
+    </div>
+    {% if patients %}
+    <table class="table table-bordered table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Género</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for patient in patients %}
+            <tr>
+                <td>{{ patient.first_name }}</td>
+                <td>{{ patient.last_name }}</td>
+                <td>{{ patient.date_of_birth }}</td>
+                <td>{{ patient.get_gender_display }}</td>
+                <td>
+                    <a href="{% url 'patient_detail' patient.pk %}" class="btn btn-info btn-sm">Ver</a>
+                    <a href="{% url 'patient_update' patient.pk %}" class="btn btn-warning btn-sm">Editar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-info" role="alert">
+        No se han registrado pacientes.
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

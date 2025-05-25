@@ -1,0 +1,39 @@
+{% extends "core/base.html" %}
+{% block title %}Iniciar Sesión{% endblock %}
+
+{% block content %}
+<p>Bienvenido al sistema de diagnóstico renal. Por favor, inicie sesión o regístrese para continuar.</p>
+<div class="container mt-3">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-dark text-white">
+                    <h4 class="mb-0"><i class="bi bi-box-arrow-in-right"></i> Iniciar Sesión</h4>
+                </div>
+                <div class="card-body">
+                    {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <strong>Error!</strong> Por favor, corrija los errores en el formulario.
+                    </div>
+                    {% endif %}
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group text-center">
+                            <div class="col-md-12"><label for="id_username">Usuario</label></div>
+                            <div class="col-md-12">{{ form.username }}</div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12"><label for="id_password">Contraseña</label></div>
+                            <div class="col-md-12">{{ form.password }}</div>
+                        </div>
+                        <button type="submit" class="btn btn-outline-secondary btn-block w-200">Ingresar</button>
+                    </form>
+                </div>
+                <div class="card-footer text-center text-white bg-dark"> 
+                    ¿No tienes una cuenta? <a class="text-white" href="{% url 'register' %}">Regístrate aquí</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

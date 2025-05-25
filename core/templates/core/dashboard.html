@@ -1,0 +1,66 @@
+{% extends "core/base.html" %}
+{% block title %}Dashboard Médico{% endblock %}
+
+{% block content %}
+<div class="container mt-3">
+    <h2 class="mb-4">Bienvenido, Dr. {{ user.username }}</h2>
+    
+    <!-- Resumen de métricas -->
+    <div class="row">
+        <!-- Total de Pacientes -->
+        <div class="col-md-4">
+            <div class="card text-white mb-3 bg-dark">
+                <div class="card-header">Total Pacientes</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ total_patients }} </h5>
+                    <p class="card-text">Pacientes registrados en el sistema.</p>
+                    <a href="{% url 'patient_list' %}" class="btn btn-outline-light btn-sm">Ver Detalles</a>
+                </div>
+            </div>
+        </div>
+        <!-- Imágenes Procesadas -->
+        <div class="col-md-4">
+            <div class="card text-white bg-dark mb-3">
+                <div class="card-header">Imágenes Procesadas</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ processed_images }}</h5>
+                    <p class="card-text">Imágenes de ultrasonido analizadas.</p>
+                    <a href="#" class="btn btn-outline-light btn-sm">Ver Reportes</a>
+                </div>
+            </div>
+        </div>
+        <!-- Alertas de Diagnóstico -->
+        <div class="col-md-4">
+            <div class="card text-white bg-dark mb-3">
+                <div class="card-header">Alertas de Diagnóstico</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ alerts }}</h5>
+                    <p class="card-text">Casos que requieren atención inmediata.</p>
+                    <a href="#" class="btn btn-outline-light btn-sm">Revisar Alertas</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lista de Pacientes Recientes -->
+    <div class="card mt-4">
+        <div class="card-header">
+            Pacientes Recientes
+        </div>
+        <div class="card-body">
+            {% if recent_patients %}
+            <ul class="list-group">
+                {% for patient in recent_patients %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ patient.first_name }} {{ patient.last_name }}
+                    <a href="{% url 'patient_detail' patient.pk %}" class="btn btn-primary btn-sm">Ver Detalle</a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No hay pacientes recientes registrados.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

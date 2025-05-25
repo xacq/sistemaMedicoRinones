@@ -1,0 +1,14 @@
+{% extends "core/base.html" %}
+{% block title %}Detalle del Examen{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Detalle del Examen</h2>
+    <p><strong>ID:</strong> {{ exam.id }}</p>
+    <p><strong>Fecha:</strong> {{ exam.date }}</p>
+    <p><strong>Tipo de Examen:</strong> {{ exam.exam_type }}</p>
+    <p><strong>Resultado:</strong> {{ exam.result }}</p>
+    <p><strong>Notas:</strong> {{ exam.notes }}</p>
+    <a href="{% url 'patient_history' %}" class="btn btn-secondary mt-3">Volver al Historial</a>
+</div>
+{% endblock %}

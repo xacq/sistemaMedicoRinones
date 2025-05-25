@@ -1,0 +1,41 @@
+{% extends "core/base.html" %}
+{% block title %}{% if form.instance.pk %}Editar Paciente{% else %}Agregar Paciente{% endif %}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4"><strong>{% if form.instance.pk %}Editar Paciente{% else %}Agregar Paciente{% endif %}</strong></h2>
+    <div class="card shadow bg-light">
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="form-group text-end">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {{ field.label_tag }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ field }}
+                        </div>          
+                        <div class="row">                  
+                            {% if field.help_text %}
+                                <small class="form-text text-muted">{{ field.help_text }}</small>
+                            {% endif %}
+                            {% for error in field.errors %}
+                                <div class="alert alert-danger mt-1">{{ error }}</div>
+                            {% endfor %}
+                        </div>    
+                    </div>
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-outline-dark btn-block">
+                    {% if form.instance.pk %}Actualizar{% else %}Crear{% endif %}
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="mt-3">
+        <a href="{% url 'patient_list' %}" class="btn btn-outline-dark">Volver a la lista de pacientes</a>
+    </div>
+</div>
+{% endblock %}
