@@ -16,4 +16,5 @@ urlpatterns = [
     path('patients/<int:pk>/edit/', views.patient_update, name='patient_update'),
     path('patients/<int:pk>/', views.patient_detail, name='patient_detail'),
     path('register/', views.register, name='register'),
+    path('procesar-imagen/', views.procesar_imagen_view, name='procesar_imagen'),
 ]

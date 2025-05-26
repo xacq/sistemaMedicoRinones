@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 from .forms import PatientProfileForm  # Asegúrate de tener este formulario definido
 from .models import Patient  # Asegúrate de tener este modelo definido
 from .forms import PatientProfileForm
+from .forms import ImagenForm
+from .utils import cargar_modelo, procesar_imagen
 
 @login_required
 def patient_profile_edit(request):
@@ -198,3 +200,16 @@ def patient_result_detail(request, pk):
         'notes': 'Se observan anomalías en la ecografía del riñón derecho.'
     }
     return render(request, 'core/patient_result_detail.html', {'result': result})
+
+def procesar_imagen_view(request):
+    resultado = None
+    if request.method == 'POST':
+        form = ImagenForm(request.POST, request.FILES)
+        if form.is_valid():
+            imagen = form.cleaned_data['imagen']
+            imagen_procesada = procesar_imagen(imagen)
+            modelo = cargar_modelo()
+            resultado = modelo.predict([imagen_procesada])[0]
+    else:
+        form = ImagenForm()
+    return render(request, 'procesar_imagen.html', {'form': form, 'resultado': resultado})

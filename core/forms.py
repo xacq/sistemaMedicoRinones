@@ -41,3 +41,6 @@ class PatientProfileForm(forms.ModelForm):
             'gender': forms.Select(attrs={'class': 'form-control'}),
             'contact': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
+class ImagenForm(forms.Form):
+    imagen = forms.ImageField(label='Subir imagen para análisis')

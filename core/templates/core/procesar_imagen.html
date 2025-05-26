@@ -1,0 +1,10 @@
+<!-- ssmedico/templates/procesar_imagen.html -->
+<h1>Procesar Imagen</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Procesar</button>
+</form>
+{% if resultado %}
+    <h2>Resultado: {{ resultado }}</h2>
+{% endif %}
